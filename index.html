@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Arimo&display=swap" rel="stylesheet">
+    <title>Movie List</title>
+  <script type="module" crossorigin src="/assets/index-DEx1QZhW.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DIzgyrWc.css">
+</head>
+<body>
+    <div class="container">
+        <div class="movie__wrapper">
+            <div class="movie__category">
+                <span class="movie__list">Список фильмов</span>
+                <span class="movie__year">2023</span>
+            </div>
+            <h1 class="movie__title">Посмотреть</h1>
+        </div>
+        
+        <div id="movieContainer" class="movie__container">
+            <div class="movie__form">
+                <div class="movie__form-search">
+                    <input id="movieName" class="movie__form-names" type="text" placeholder="Добавить фильм">
+                    <button id="movieBtn" class="movie__form-circle">
+                        <img src="/Vector.svg" alt="стрелка">
+                    </button>
+                </div>
+                <button id="clearBtn" class="clear-btn">Отчистить список</button>
+            </div>
+            
+            <p class="error"></p>
+            <div class="movie__lists"></div>
+        </div>
+    </div>
+ 
+</body>
+</html>
