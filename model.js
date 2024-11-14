@@ -53,6 +53,6 @@ export class Model {
     }
 
     _isValid(title) {
-        return title.length > 0 && title.length <= 50;
+        return title.trim().length > 0 && title.trim().length <= 50;
     }
 }

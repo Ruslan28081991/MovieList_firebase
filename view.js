@@ -7,11 +7,11 @@ export class View {
         onClickMovie,
         deleteMovie
       }) {
-        this.movieName = document.getElementById('movieName');
-        this.movieBtn = document.getElementById("movieBtn");
+        this.movieName = document.querySelector(".movie__input");
+        this.movieBtn = document.querySelector(".movie__button");
         this.movieLists = document.querySelector(".movie__lists");
-        this.clearMovies = document.getElementById('clearBtn');
-        this.errorMessage = document.querySelector(".error");
+        this.clearMovies = document.querySelector(".movie__clear-btn");
+        this.errorMessage = document.querySelector(".movie__error");
 
         this.onNewMovie = onNewMovie;
         this.deleteMovies = deleteMovies;
@@ -26,6 +26,11 @@ export class View {
                 this.handleMovie()
             }
         })
+        this.movieName.addEventListener('input', () => {
+            if(this.movieName.value.trim().length > 0) {
+                this.errorMessage.innerHTML = ''
+            }
+        })
     }
 
     render({ moviesIds, moviesById }) {
@@ -36,9 +41,6 @@ export class View {
         })
     }
 
-    
-    
-
     createElement(movie, isError) {
         if(isError) {
             return
@@ -46,6 +48,9 @@ export class View {
             const addLabel = document.createElement('label');
             addLabel.setAttribute('for', movie.id);
             addLabel.classList = 'movie__label';
+
+            const addContainer = document.createElement('div')
+            addContainer.classList = 'movie__label-container';
     
             const addInput = document.createElement('input');
             addInput.classList = 'movie__label-input';
@@ -69,6 +74,9 @@ export class View {
                 }
                 this.onClickMovie(movie.id);
             };
+
+            const addCircle = document.createElement('span');
+            addCircle.classList = 'movie__label-circle'
     
             const addText = document.createElement('p');
             addText.classList = 'movie__label-text';
@@ -81,13 +89,20 @@ export class View {
                 this.deleteMovie(movie.id)
             }
     
-            addLabel.append(addInput, addText, addImg);
+            addLabel.append(addContainer, addImg);
+            addContainer.append(addInput, addCircle, addText)
             this.movieLists.append(addLabel);
         }
     }
 
     handleMovie = () => {
-        const movieText = this.movieName.value;
+        this.errorMessage.innerText = ''
+        const movieText = this.movieName.value.trim()
+        if(!movieText) {
+            this.errorMessage.innerText = 'Вы не написали название фильма';
+            return
+        }
+  
         this.onNewMovie(movieText);
         this.movieName.value = ''
         this.movieName.focus();

@@ -28,12 +28,7 @@ export class Controller {
     handleModel = (movie, isError) => {
         this.view.createElement(movie, isError)
         this.view.render(this.model.getMovies()) 
-        if(isError) {
-            this.view.errorMessage.innerText = 'Вы не написали название фильма';
-            return
-        } else {
-            this.firebase.add(movie)
-        }
+        this.firebase.add(movie)
     }
 
     handleView = (movie) => {
