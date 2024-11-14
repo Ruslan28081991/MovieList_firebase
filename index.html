@@ -3,35 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/MovieList_firebase/icon.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Arimo&display=swap" rel="stylesheet">
     <title>Movie List</title>
-  <script type="module" crossorigin src="/MovieList_firebase/assets/index-DC4HVTv6.js"></script>
-  <link rel="stylesheet" crossorigin href="/MovieList_firebase/assets/index-DIzgyrWc.css">
+  <script type="module" crossorigin src="/MovieList_firebase/assets/index-C53IQez-.js"></script>
+  <link rel="stylesheet" crossorigin href="/MovieList_firebase/assets/index-DE8X2ULz.css">
 </head>
 <body>
-    <div class="container">
+    <div class="movie">
         <div class="movie__wrapper">
             <div class="movie__category">
-                <span class="movie__list">Список фильмов</span>
-                <span class="movie__year">2023</span>
+                <span class="movie__category-list">Список фильмов</span>
+                <span class="movie__category-year">2024</span>
             </div>
             <h1 class="movie__title">Посмотреть</h1>
         </div>
         
-        <div id="movieContainer" class="movie__container">
+        <div class="movie__container">
             <div class="movie__form">
-                <div class="movie__form-search">
-                    <input id="movieName" class="movie__form-names" type="text" placeholder="Добавить фильм">
-                    <button id="movieBtn" class="movie__form-circle">
+                <div class="movie__search">
+                    <input class="movie__input" type="text" placeholder="Добавить фильм">
+                    <button class="movie__button">
                         <img src="/MovieList_firebase/Vector.svg" alt="стрелка">
                     </button>
                 </div>
-                <button id="clearBtn" class="clear-btn">Отчистить список</button>
+                <button class="movie__clear-btn">Удалить список</button>
             </div>
             
-            <p class="error"></p>
+            <p class="movie__error"></p>
             <div class="movie__lists"></div>
         </div>
     </div>
