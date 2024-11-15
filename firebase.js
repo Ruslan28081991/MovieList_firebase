@@ -36,47 +36,70 @@ export class Firebase {
                 done: movie.done,
                 createdAt: serverTimestamp(), 
             });
-          } catch (e) {
-            console.error("Error adding document: ", e);
-          }
+        } catch (e) {
+          console.error("Ошибка добавления: ", e);
+          throw new Error("Ошибка добавления фильма в базу данных")
+        }
     }
     
     async pull() {
         const ref = collection(this.db, this.key)
         const q = query(ref, orderBy("createdAt"));
-        const querySnapshot = await getDocs(q);
-        const movies = [];
 
-        querySnapshot.forEach((doc) => {
-                movies.push({
-                    title: doc.data().title,
-                    done: doc.data().done,
-                    id: doc.id
-                });
-        });
-        return movies;
+        try {
+            const querySnapshot = await getDocs(q);
+            const movies = [];
+
+            querySnapshot.forEach((doc) => {
+                    movies.push({
+                        title: doc.data().title,
+                        done: doc.data().done,
+                        id: doc.id
+                    });
+            });
+            return movies;
+        } catch (error) {
+            console.error("Ошибка загрузки данных", error)
+            throw new Error("Ошибка загрузки данных из базы");
+            
+        }
     }
 
     async update(movie) {
         const result = doc(this.db, this.key, movie.id);
 
-        await updateDoc(result, {
-            done: movie.done
-        });
+        try {
+            await updateDoc(result, {
+                done: movie.done
+            });
+        } catch (error) {
+            console.error("Ошибка обновления", error)
+            throw new Error("Ошибка обновления фильма");
+            
+        }
     }   
 
     async deleteAll({ moviesIds }) {
         const batch = writeBatch(this.db);
 
-        moviesIds.forEach(id => {
-            const ref = doc(this.db, this.key, id);
-            batch.delete(ref)
-        })
-
-       await batch.commit();
+        try {
+            moviesIds.forEach(id => {
+                const ref = doc(this.db, this.key, id);
+                batch.delete(ref)
+            })
+           await batch.commit();
+        } catch (error) {
+            console.error("Ошибка удаления списка", error)
+            throw new Error("Ошибка удаления списка фильмов");
+        }
     }
 
     async delete(id) {
-        await deleteDoc(doc(this.db, this.key, id));
+        try {
+            await deleteDoc(doc(this.db, this.key, id));
+        } catch (error) {
+            console.error("Ошибка удаления", error)
+            throw new Error("Ошибка удаления фильма");
+        }
     }  
 }

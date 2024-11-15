@@ -43,6 +43,7 @@ export class View {
 
     createElement(movie, isError) {
         if(isError) {
+            this.errorMessage.innerHTML = 'Количество символов больше 50'
             return
         } else {
             const addLabel = document.createElement('label');

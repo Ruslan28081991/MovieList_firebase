@@ -28,7 +28,11 @@ export class Controller {
     handleModel = (movie, isError) => {
         this.view.createElement(movie, isError)
         this.view.render(this.model.getMovies()) 
-        this.firebase.add(movie)
+        if(isError) {
+            return
+        } else {
+            this.firebase.add(movie)
+        }
     }
 
     handleView = (movie) => {
@@ -51,5 +55,4 @@ export class Controller {
         this.pullFirebase()
         this.view.render(this.model.getMovies())
     }
-    
 }
